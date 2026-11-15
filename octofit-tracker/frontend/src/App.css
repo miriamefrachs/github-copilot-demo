@@ -1,0 +1,35 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f8ff;
+}
+
+nav.navbar {
+  background-color: #4682b4;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-link {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+nav .nav-link.active {
+  text-decoration: underline;
+}
+
+h1 {
+  color: #00008b;
+}
+
+.card-header {
+  background-color: #e6f0fa;
+}
+
+.card-header h2 {
+  color: #00008b;
+}
+
+.modal-title {
+  color: #00008b;
+}
