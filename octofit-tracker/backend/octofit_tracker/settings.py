@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,6 +27,14 @@ SECRET_KEY = "django-insecure-d+5g$#+h%n#5s-8dve@gv(e&okx&1k95-+ve5-3h(igtf&z!#_
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
+# The Codespaces proxy terminates HTTPS and forwards plain HTTP to Django
+CODESPACE_NAME = os.environ.get("CODESPACE_NAME")
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "https://*.app.github.dev"]
+if CODESPACE_NAME:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{CODESPACE_NAME}-8000.app.github.dev")
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
 
 
 # Application definition

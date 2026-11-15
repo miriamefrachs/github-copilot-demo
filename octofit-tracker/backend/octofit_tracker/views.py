@@ -1,3 +1,5 @@
+import os
+
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -14,9 +16,16 @@ from .serializers import (
 
 @api_view(["GET"])
 def api_root(request, format=None):
-    base = request.build_absolute_uri("/api/")
+    codespace = os.environ.get("CODESPACE_NAME")
+    if codespace and not request.get_host().startswith("localhost"):
+        base_url = f"https://{codespace}-8000.app.github.dev/"
+    else:
+        base_url = request.build_absolute_uri("/")
     return Response(
-        {name: f"{base}{name}/" for name in ("users", "teams", "activity", "leaderboard", "workouts")}
+        {
+            name: f"{base_url}api/{name}/"
+            for name in ("users", "teams", "activity", "leaderboard", "workouts")
+        }
     )
 
 
